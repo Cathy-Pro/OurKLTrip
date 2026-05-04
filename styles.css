@@ -202,6 +202,22 @@ a {
   background: rgba(255, 255, 255, 0.54);
 }
 
+button.weather-item {
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+button.weather-item:hover,
+button.weather-item:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.78);
+}
+
 .weather-item strong,
 .weather-item span {
   display: block;
@@ -341,6 +357,9 @@ a {
 .timeline-content h3 {
   margin: 0;
   font-size: 1.03rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .tag-row {
@@ -571,22 +590,61 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .tab-button {
+    padding: 12px;
+  }
+
+  .tab-title {
+    font-size: 0.96rem;
+  }
+
+  .tab-subtitle {
+    font-size: 0.78rem;
+  }
+
   .library-header {
     flex-direction: column;
     align-items: stretch;
   }
 
   .timeline-list::before {
-    left: 68px;
+    left: 58px;
   }
 
   .timeline-item {
-    grid-template-columns: 54px minmax(0, 1fr);
-    gap: 18px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
   }
 
   .timeline-dot {
-    left: 61px;
+    left: 51px;
+  }
+
+  .time-label {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .timeline-content h3 {
+    font-size: 0.98rem;
+  }
+
+  .tag-chip {
+    font-size: 0.72rem;
+    padding: 6px 9px;
+  }
+
+  .weather-item {
+    padding: 12px;
+  }
+
+  .weather-item strong {
+    font-size: 0.92rem;
+  }
+
+  .weather-item span {
+    font-size: 0.82rem;
+    line-height: 1.45;
   }
 
   .map-frame {

@@ -207,6 +207,12 @@ const panelHost = document.getElementById("panel-host");
 const weatherGrid = document.getElementById("weather-grid");
 const weatherStatus = document.getElementById("weather-status");
 const maps = new Map();
+const weatherDayTargets = {
+  "2026-05-14": "day-1",
+  "2026-05-15": "day-2",
+  "2026-05-16": "day-3",
+  "2026-05-17": "day-4"
+};
 
 let activeTab = "day-1";
 let activeLibraryGroup = "All";
@@ -370,6 +376,18 @@ function activateTab(tabId) {
   }
 }
 
+function goToDayFromWeather(date) {
+  const targetTab = weatherDayTargets[date];
+  if (!targetTab) return;
+
+  activateTab(targetTab);
+
+  const planner = document.querySelector(".tabs-shell");
+  if (planner) {
+    planner.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 function initializeMap(dayId) {
   if (typeof L === "undefined" || maps.has(dayId)) {
     if (maps.has(dayId)) {
@@ -527,8 +545,17 @@ function renderLibraryItems() {
 
 async function fetchWeather() {
   weatherGrid.innerHTML = weatherDates
-    .map((date) => `<article class="weather-item"><strong>${formatForecastDate(date)}</strong><span>Forecast loading...</span></article>`)
+    .map(
+      (date) => `
+        <button class="weather-item" type="button" data-weather-date="${date}">
+          <strong>${formatForecastDate(date)}</strong>
+          <span>Forecast loading...</span>
+        </button>
+      `
+    )
     .join("");
+
+  bindWeatherDayClicks();
 
   const params = new URLSearchParams({
     latitude: String(weatherCoordinates.latitude),
@@ -553,22 +580,39 @@ async function fetchWeather() {
         const low = Math.round(data.daily.temperature_2m_min[index]);
         const rain = data.daily.precipitation_probability_max[index];
         return `
-          <article class="weather-item">
+          <button class="weather-item" type="button" data-weather-date="${date}">
             <strong>${formatForecastDate(date)}</strong>
             <span>${weatherCodeMap[code] || "Variable conditions"}</span>
             <span>${low}°C - ${high}°C · Rain ${rain}%</span>
-          </article>
+          </button>
         `;
       })
       .join("");
+    bindWeatherDayClicks();
     weatherStatus.textContent = "Live forecast";
   } catch (error) {
     weatherStatus.textContent = "Forecast unavailable";
     weatherGrid.innerHTML = weatherDates
-      .map((date) => `<article class="weather-item"><strong>${formatForecastDate(date)}</strong><span>Unable to load live data right now.</span></article>`)
+      .map(
+        (date) => `
+          <button class="weather-item" type="button" data-weather-date="${date}">
+            <strong>${formatForecastDate(date)}</strong>
+            <span>Unable to load live data right now.</span>
+          </button>
+        `
+      )
       .join("");
+    bindWeatherDayClicks();
     console.error(error);
   }
+}
+
+function bindWeatherDayClicks() {
+  weatherGrid.querySelectorAll("[data-weather-date]").forEach((button) => {
+    button.addEventListener("click", () => {
+      goToDayFromWeather(button.dataset.weatherDate);
+    });
+  });
 }
 
 function formatForecastDate(dateString) {
