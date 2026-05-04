@@ -12,7 +12,8 @@ const dayPlans = [
     date: "Thu, 14 May",
     mapCenter: [3.1456, 101.7102],
     mapZoom: 14,
-    mapFitPadding: [36, 36],
+    mapFitPadding: [54, 54],
+    mapExtraZoomOut: 1,
     routeStopsData: [
       { name: "JW Marriott / The Westin", coords: [3.1488, 101.7142] },
       { name: "Ah Hei Bak Kut Teh", coords: [3.1466, 101.7114] },
