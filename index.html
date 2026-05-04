@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Getaway Trip</title>
+    <meta
+      name="description"
+      content="A warm and organized 4-day Kuala Lumpur getaway planner with daily tabs, weather, Google Maps routing, and a separate recommendation library."
+    />
+    <link rel="icon" href="trip.jpg" type="image/jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="glow glow-left" aria-hidden="true"></div>
+      <div class="glow glow-right" aria-hidden="true"></div>
+
+      <section class="app-frame">
+        <header class="hero-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Kuala Lumpur · 14-17 May</p>
+            <h1>Our Getaway Trip</h1>
+          </div>
+
+          <aside class="weather-card">
+            <div class="card-heading">
+              <p class="eyebrow">Weather</p>
+              <span id="weather-status" class="status-pill">Loading live forecast</span>
+            </div>
+            <div id="weather-grid" class="weather-grid" aria-live="polite"></div>
+          </aside>
+        </header>
+
+        <section class="tabs-shell">
+          <div id="tab-row" class="tab-row" role="tablist" aria-label="Trip tabs"></div>
+          <div id="panel-host" class="panel-host"></div>
+        </section>
+      </section>
+    </main>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
